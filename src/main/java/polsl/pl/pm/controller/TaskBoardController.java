@@ -15,6 +15,7 @@ import java.util.List;
 
 
 @RestController
+@RequestMapping(value="/taskboard")
 public class TaskBoardController {
 
     @Autowired
@@ -28,7 +29,7 @@ public class TaskBoardController {
     // "inProgress": [ { "taskName": "test2", "taskId": 3 } ], "inTesting": [ { "taskName": "Testowane", "taskId": 5 } ],
     // "done": [ { "taskName": "Ukonczone", "taskId": 6 } ] } ] }
 
-    @RequestMapping(value="/taskboard", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     @CrossOrigin(origins = "http://localhost:4200")
     public String TaskBoardWeb(){
         String req = new String();
@@ -36,8 +37,10 @@ public class TaskBoardController {
         User user = userRepository.findByUsername(auth.getName());
         List<Task> tasks = new ArrayList<>();
         req += user.toTaskString();
-        //tasks.add(new Task("Projekt","Projekt na pp",false, "open", user));
-        // tasks.add(new Task("Projekt2","Projekt na hd",false, "done", user));
+        tasks.add(new Task("Projekt","Projekt na pp",false, "open", user));
+        tasks.add(new Task("Projekt2","Projekt na hd",false, "done", user));
+        System.out.println(tasks.get(0).toString());
+        taskRepository.save(tasks);
         tasks = taskRepository.findByUserAndStatus(user,"open");
         if(tasks.size()>0) {
             req += ", \"open\":[";
@@ -60,15 +63,20 @@ public class TaskBoardController {
             req += "]";
         }
         req+=" } ] }\0";
-        //taskRepository.save(tasks);
-        //userRepository.save(user);
         return req;
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
-    public String TaskBoardMove(@RequestBody String redirect){
-        return "localhost:8080/" + redirect;
+    public void TaskAdd(@RequestBody Task task){
+        taskRepository.save(task);
     }
+
+
+   // @RequestMapping(method = RequestMethod.POST)
+    //public String TaskBoardMove(@RequestBody String redirect){
+    //    return "localhost:8080/" + redirect;
+    //}
 /*
     @RequestMapping(method = RequestMethod.POST)
     public void TaskBoardAdd(@RequestBody Task task, String mail){

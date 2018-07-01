@@ -22,21 +22,21 @@ public class User {
 	private int id;
 	@Column(name = "email")
 	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
+	//@NotEmpty(message = "*Please provide an email")
 	private String email;
 	@Column(name = "password")
 	@Length(min = 5, message = "*Your password must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your password")
+	//@NotEmpty(message = "*Please provide your password")
 	@Transient
 	private String password;
-	@Column(name = "name")
+	@Column(name = "username")
 	@NotEmpty(message = "*Please provide your name")
-	private String name;
+	private String username;
 	@Column(name = "last_name")
-	@NotEmpty(message = "*Please provide your last name")
+	//@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
-	@Column(name = "active")
-	private int active;
+	//@Column(name = "active")
+	//private int active;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
@@ -79,12 +79,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String name) {
+		this.username = name;
 	}
 
 	public String getLastName() {
@@ -103,13 +103,13 @@ public class User {
 		this.email = email;
 	}
 
-	public int getActive() {
-		return active;
-	}
+	//public int getActive() {
+	//	return active;
+	//}
 
-	public void setActive(int active) {
-		this.active = active;
-	}
+	//public void setActive(int active) {
+	//	this.active = active;
+	//}
 
 	public Set<Role> getRoles() {
 		return roles;
@@ -121,7 +121,7 @@ public class User {
 
 	public String toTaskString() {
 		//return { "userId": 1, "userName": "bill", "tasks": [ { "userId": 1,";
-		return "{ \"userId\":"+ this.getId()+ ", \"userName\": \"" + this.getName() + "\", \"tasks\": [ { \"userId\": "+ this.getId();
+		return "{ \"userId\":"+ this.getId()+ ", \"userName\": \"" + this.getUsername() + "\", \"tasks\": [ { \"userId\": "+ this.getId();
 		}
 
 }

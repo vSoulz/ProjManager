@@ -2,6 +2,7 @@ package polsl.pl.pm.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import polsl.pl.pm.repository.UserRepository;
 
 import javax.persistence.*;
 
@@ -26,11 +27,6 @@ public class Task {
     @Column(name = "status", nullable = false)
     private String status;
 
-    public String toTaskString() {
-        return "{\"taskName=\":\"" + title +
-                "\",\"taskId\":" + taskId +
-                '}';
-    }
 
     @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     @JoinTable(	name = "user_tasks", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -41,12 +37,13 @@ public class Task {
 
     private Project project;
 
-    public Task(String title, String content, boolean finished, String status, User user) {
+    public Task(String title, String content, boolean finished, String status, User user, Project project) {
         this.title = title;
         this.content = content;
         this.finished = finished;
         this.user = user;
         this.status = status;
+        this.project = project;
     }
 
     public Task(){
@@ -100,5 +97,13 @@ public class Task {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

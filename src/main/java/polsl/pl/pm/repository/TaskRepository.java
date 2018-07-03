@@ -12,8 +12,8 @@ import java.util.List;
 @Repository("taskRepository")
 @CrossOrigin(origins = "http://localhost:4200")
 public interface TaskRepository extends JpaRepository<Task, String>{
+	Task findByTaskId(int taskId);
 	List<Task> findByUser(User user);
 	List<Task> findByStatus(String status);
 	List<Task> findByUserAndStatus(User user, String status);
-
 }

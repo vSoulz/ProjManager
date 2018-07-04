@@ -28,20 +28,21 @@ public class Task {
     private String status;
 
 
-    @OneToOne(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_tasks", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private User user;
+    //@OneToOne(orphanRemoval = true , fetch = FetchType.LAZY)
+    //@JoinTable(	name = "user_tasks", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "userId", nullable = false)
+    private int userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_project", nullable = true)
 
     private Project project;
 
-    public Task(String title, String content, boolean finished, String status, User user, Project project) {
+    public Task(String title, String content, boolean finished, String status, int userId, Project project) {
         this.title = title;
         this.content = content;
         this.finished = finished;
-        this.user = user;
+        this.userId = userId;
         this.status = status;
         this.project = project;
     }
@@ -83,12 +84,12 @@ public class Task {
         this.finished = finished;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public Project getProject() {

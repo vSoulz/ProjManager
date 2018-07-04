@@ -39,12 +39,12 @@ public class TaskBoardController {
         System.out.println("przed sprawdzeniem");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
-//        List<Task> tasks = new ArrayList<>();
-//        tasks.add(new Task("Projekt","Projekt na pp",false, "open", user));
-//        tasks.add(new Task("Projekt2","Projekt na hd",false, "done", user));
-//        taskRepository.save(tasks);
+        List<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("Projekt","Projekt na pp",false, "open", 1, null));
+        tasks.add(new Task("Projekt2","Projekt na hd",false, "done", 1,null));
+        taskRepository.save(tasks);
         UserTB userTaskBoard = new UserTB(user.getId(), user.getUsername(), new TaskTB(user.getId(),
-                taskRepository.findByUserAndStatus(user,"open"), taskRepository.findByUserAndStatus(user,"done")));
+                taskRepository.findByUserIdAndStatus(user.getId(),"open"), taskRepository.findByUserIdAndStatus(user.getId(),"done")));
         System.out.println(userTaskBoard);
         return ResponseEntity.ok(userTaskBoard);
     }
@@ -56,7 +56,7 @@ public class TaskBoardController {
         //System.out.println("Content="+task.getContent()+"\nTitle="+task.getTitle()+"\nStatus="+task.ge);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
-        task.setUser(user);
+        task.setUserId(user.getId());
         taskRepository.save(task);
     }
 
@@ -64,11 +64,19 @@ public class TaskBoardController {
     @RequestMapping(method = RequestMethod.PUT)
     public void UpdateTask(@RequestBody Map<String, String> json)
     {
+        Task task = taskRepository.findByTaskId(Integer.parseInt(json.get("taskId")));
+        if(task!=null)
+        {
+            task.setUserId(Integer.parseInt(json.get("newUserId")));
+            task.setStatus(json.get("newStatus"));
+            taskRepository.save(task);
+        }
+    }
 
-        //Task task = taskRepository.findByTaskId(Integer.getInteger(json.get("taskId")));
-        /*task.setUser(*/userRepository.findOne(new Long(json.get("newUserId")));
-        //task.setStatus(json.get("newStatus"));
-        //taskRepository.save(task);
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void DeleteTask(@RequestBody Map<String, String> json)
+    {
+        taskRepository.delete(Integer.parseInt(json.get("taskId")));
     }
 
 }

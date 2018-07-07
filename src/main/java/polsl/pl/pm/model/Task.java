@@ -29,10 +29,10 @@ public class Task {
 
 
     @Column(name = "userId", nullable = false)
-    private int userId = -1;
+    private int userId = 0;
 
-    //@Column(name = "projectId", nullable = true)
-    //private int projectId;
+    @Column(name = "projectId", nullable = true)
+    private int projectId;
 
     @Column(name = "bugs", nullable = true)
     private String bugs;
@@ -43,13 +43,13 @@ public class Task {
     @Column(name = "time", nullable = true)
     private String time;
 
-    public Task(String title, String content, boolean finished, String status, int userId /*,Project project*/) {
+    public Task(String title, String content, boolean finished, String status, int userId ,int projectId) {
         this.title = title;
         this.content = content;
         this.finished = finished;
         this.userId = userId;
         this.status = status;
-        //this.project = project;
+        this.projectId = projectId;
     }
 
     public Task(){
@@ -97,13 +97,13 @@ public class Task {
         this.userId = userId;
     }
 
-    /*public Project getProject() {
-        return project;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }*/
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
 
     public String getStatus() {
         return status;

@@ -29,8 +29,8 @@ public class WorkByPersonController {
     public List<UserTB> WorkByPersonWeb(){
         Iterable<User> users = userRepository.findAll();
         List<UserTB> userTBList = new ArrayList<>();
-        userTBList.add(new UserTB(-1, "Unassigned", new TaskTB( -1,
-                taskRepository.findByUserIdAndStatus(-1, "open"), taskRepository.findByUserIdAndStatus(-1,"done"))));
+        userTBList.add(new UserTB(0, "Unassigned", new TaskTB( 0,
+                taskRepository.findByUserIdAndStatus(0, "open"), taskRepository.findByUserIdAndStatus(0,"done"))));
         for (User user: users)
         {
             List<Task> tasks = new ArrayList<>();

@@ -14,28 +14,22 @@ public class Project {
     @Column(name = "project_id")
     private int projectId;
 
+    @Column(name = "title", nullable = false)
     private String title;
 
+    @Column(name = "description", nullable = true)
     private String description;
 
-/*  @ManyToMany(cascade=CascadeType.ALL,mappedBy = "projects")
-    private List<UserController> users = new ArrayList<>();*/
-
-    @OneToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "project_tasks",
-            joinColumns = { @JoinColumn(name = "project_id") },
-            inverseJoinColumns = { @JoinColumn(name = "task_id") }
-    )
-    private  List<Task> tasks = new ArrayList<>();
+    @Column(name = "userId", nullable = false)
+    private int userId;
 
 
+    public Project(){}
 
-/*    @ManyToOne
-    private Administrator supervisor;*/
-
-    public Project(){
-
+    public Project(String title, String description, int userId) {
+        this.title = title;
+        this.description = description;
+        this.userId = userId;
     }
 
     public int getProjectId() {
@@ -62,31 +56,11 @@ public class Project {
         this.description = description;
     }
 
-/*    public List<UserController> getUsers() {
-        return users;
-    }*/
-
-/*
-    public void setUsers(List<UserController> users) {
-        this.users = users;
-    }
-*/
-
-    public List<Task> getTasks() {
-        return tasks;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
-
-/*
-    public Administrator getSupervisor() {
-        return supervisor;
-    }
-*/
-
-/*    public void setSupervisor(Administrator supervisor) {
-        this.supervisor = supervisor;
-    }*/
 }

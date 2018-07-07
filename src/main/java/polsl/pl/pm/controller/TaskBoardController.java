@@ -48,9 +48,6 @@ public class TaskBoardController {
     @RequestMapping(method = RequestMethod.POST)
     public void TaskAdd(@RequestBody Task task)
     {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userRepository.findByUsername(auth.getName());
-        task.setUserId(user.getId());
         taskRepository.save(task);
     }
 

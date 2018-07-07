@@ -29,7 +29,7 @@ public class Task {
 
 
     @Column(name = "userId", nullable = false)
-    private int userId;
+    private int userId = -1;
 
     //@Column(name = "projectId", nullable = true)
     //private int projectId;

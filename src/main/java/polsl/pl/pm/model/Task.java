@@ -32,7 +32,7 @@ public class Task {
     private int userId = 0;
 
     @Column(name = "projectId", nullable = true)
-    private int projectId;
+    private int projectId = 0;
 
     @Column(name = "bugs", nullable = true)
     private String bugs;

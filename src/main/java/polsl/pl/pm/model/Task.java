@@ -28,23 +28,28 @@ public class Task {
     private String status;
 
 
-    //@OneToOne(orphanRemoval = true , fetch = FetchType.LAZY)
-    //@JoinTable(	name = "user_tasks", joinColumns = @JoinColumn(name = "task_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "userId", nullable = false)
     private int userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_project", nullable = true)
+    //@Column(name = "projectId", nullable = true)
+    //private int projectId;
 
-    private Project project;
+    @Column(name = "bugs", nullable = true)
+    private String bugs;
 
-    public Task(String title, String content, boolean finished, String status, int userId, Project project) {
+    @Column(name = "source", nullable = true)
+    private String source;
+
+    @Column(name = "time", nullable = true)
+    private String time;
+
+    public Task(String title, String content, boolean finished, String status, int userId /*,Project project*/) {
         this.title = title;
         this.content = content;
         this.finished = finished;
         this.userId = userId;
         this.status = status;
-        this.project = project;
+        //this.project = project;
     }
 
     public Task(){
@@ -92,13 +97,13 @@ public class Task {
         this.userId = userId;
     }
 
-    public Project getProject() {
+    /*public Project getProject() {
         return project;
     }
 
     public void setProject(Project project) {
         this.project = project;
-    }
+    }*/
 
     public String getStatus() {
         return status;
@@ -106,5 +111,29 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getBugs() {
+        return bugs;
+    }
+
+    public void setBugs(String bugs) {
+        this.bugs = bugs;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

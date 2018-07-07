@@ -11,5 +11,4 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public interface ProjectRepository extends JpaRepository<Project, Integer>{
 	List<Project> findByUserId(int userId);
-
 }

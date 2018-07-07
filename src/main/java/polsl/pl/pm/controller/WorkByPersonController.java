@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value="/workbyperson")
 public class WorkByPersonController {
@@ -33,11 +33,13 @@ public class WorkByPersonController {
                 taskRepository.findByUserIdAndStatus(0, "open"), taskRepository.findByUserIdAndStatus(0,"done"))));
         for (User user: users)
         {
-            List<Task> tasks = new ArrayList<>();
-            tasks.add(new Task("Projekt","Projekt na pp",false, "open", user.getId(),0));
-            tasks.add(new Task("Projekt2","Projekt na hd",false, "done", user.getId(),0));
+//            List<Task> tasks = new ArrayList<>();
+//            tasks.add(new Task("Projekt","Projekt na pp",false, "open", user.getId()));
+//            tasks.add(new Task("Projekt2","Projekt na hd",false, "done", user.getId()));
+//            taskRepository.save(tasks);
             userTBList.add(new UserTB(user.getId(), user.getUsername(), new TaskTB(user.getId(),
                     taskRepository.findByUserIdAndStatus(user.getId(),"open"), taskRepository.findByUserIdAndStatus(user.getId(),"done"))));
+
         }
         return userTBList;
     }

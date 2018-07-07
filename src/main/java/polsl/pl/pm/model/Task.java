@@ -31,9 +31,6 @@ public class Task {
     @Column(name = "userId", nullable = false)
     private int userId = 0;
 
-    @Column(name = "projectId", nullable = true)
-    private int projectId = 0;
-
     @Column(name = "bugs", nullable = true)
     private String bugs;
 
@@ -43,13 +40,16 @@ public class Task {
     @Column(name = "time", nullable = true)
     private String time;
 
-    public Task(String title, String content, boolean finished, String status, int userId ,int projectId) {
+    @Column(name = "projectId", nullable = true)
+    private int projectId = 0;
+
+    public Task(String title, String content, boolean finished, String status, int userId) {
         this.title = title;
         this.content = content;
         this.finished = finished;
         this.userId = userId;
         this.status = status;
-        this.projectId = projectId;
+//        this.projectId = projectId;
     }
 
     public Task(){

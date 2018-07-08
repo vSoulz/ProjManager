@@ -2,23 +2,29 @@ package polsl.pl.pm.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 import polsl.pl.pm.model.Project;
+import polsl.pl.pm.model.User;
 import polsl.pl.pm.model.additional.ProjectPB;
 import polsl.pl.pm.model.additional.TaskTB;
 import polsl.pl.pm.repository.ProjectRepository;
 import polsl.pl.pm.repository.TaskRepository;
+import polsl.pl.pm.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/project")
 public class ProjectsController {
+
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     TaskRepository taskRepository;
@@ -40,6 +46,18 @@ public class ProjectsController {
             )));
         }
         return projectPBList;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public void addProject(@RequestBody Map<String, String> json)
+    {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(auth.getName());
+        Project project = new Project();
+        project.setContent(json.get("content"));
+        project.setTitle(json.get("title"));
+        project.setUserId(user.getId());
+        projectRepository.save(project);
     }
 
 

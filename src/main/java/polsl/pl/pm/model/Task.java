@@ -1,9 +1,7 @@
 package polsl.pl.pm.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import polsl.pl.pm.repository.UserRepository;
-
+import org.hibernate.annotations.Type;
+import org.hibernate.type.MaterializedClobType;
 import javax.persistence.*;
 
 @Entity
@@ -15,10 +13,11 @@ public class Task {
     @Column(name = "task_id")
     private int taskId;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = true)
     private String title;
 
     @Column(name = "content")
+    @Lob @Type(type="org.hibernate.type.MaterializedClobType")
     private String content;
 
     @Column(name = "finished", nullable = false)
@@ -32,12 +31,15 @@ public class Task {
     private int userId = 0;
 
     @Column(name = "bugs", nullable = true)
+    @Lob @Type(type="org.hibernate.type.MaterializedClobType")
     private String bugs;
 
     @Column(name = "source", nullable = true)
+    @Lob @Type(type="org.hibernate.type.MaterializedClobType")
     private String source;
 
     @Column(name = "time", nullable = true)
+    @Lob @Type(type="org.hibernate.type.MaterializedClobType")
     private String time;
 
     @Column(name = "projectId", nullable = true)
@@ -49,7 +51,6 @@ public class Task {
         this.finished = finished;
         this.userId = userId;
         this.status = status;
-//        this.projectId = projectId;
     }
 
     public Task(){

@@ -31,9 +31,13 @@ public class ProjectsController {
     {
         List<ProjectPB> projectPBList = new ArrayList<>();
         List<Project> projects = projectRepository.findAll();
+        projectPBList.add(new ProjectPB(0, new Project("Unassigned"), new TaskTB(0,
+                taskRepository.findByProjectIdAndStatus(0,"open"),taskRepository.findByProjectIdAndStatus(0,"done")
+        )));
         for (Project project: projects) {
-            projectPBList.add(new ProjectPB(project, new TaskTB(project.getProjectId(),
-                    taskRepository.findByProjectIdAndStatus(project.getProjectId(),"open"),taskRepository.findByProjectIdAndStatus(project.getProjectId(),"done"))));
+            projectPBList.add(new ProjectPB(project.getProjectId(), project, new TaskTB(project.getProjectId(),
+                    taskRepository.findByProjectIdAndStatus(project.getProjectId(),"open"),taskRepository.findByProjectIdAndStatus(project.getProjectId(),"done")
+            )));
         }
         return projectPBList;
     }

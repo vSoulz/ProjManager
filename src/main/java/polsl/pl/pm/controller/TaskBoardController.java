@@ -11,9 +11,6 @@ import polsl.pl.pm.model.additional.TaskTB;
 import polsl.pl.pm.model.additional.UserTB;
 import polsl.pl.pm.repository.TaskRepository;
 import polsl.pl.pm.repository.UserRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -32,10 +29,6 @@ public class TaskBoardController {
         System.out.println("przed sprawdzeniem");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(auth.getName());
-//        List<Task> tasks = new ArrayList<>();
-//        tasks.add(new Task("Projekt","Projekt na pp",false, "open", user.getId()));
-//        tasks.add(new Task("Projekt2","Projekt na hd",false, "done", user.getId()));
-//        taskRepository.save(tasks);
         UserTB userTaskBoard = new UserTB(user.getId(), user.getUsername(), new TaskTB(user.getId(),
                 taskRepository.findByUserIdAndStatus(user.getId(),"open"), taskRepository.findByUserIdAndStatus(user.getId(),"done")));
         System.out.println(userTaskBoard);

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ProjectPB {
 
+    Integer projectId;
     Project project;
 
     TaskTB taskTB;
@@ -13,7 +14,8 @@ public class ProjectPB {
     public ProjectPB() {
     }
 
-    public ProjectPB(Project project, TaskTB taskTB) {
+    public ProjectPB(Integer projectId, Project project, TaskTB taskTB) {
+        this.projectId = projectId;
         this.project = project;
         this.taskTB = taskTB;
     }

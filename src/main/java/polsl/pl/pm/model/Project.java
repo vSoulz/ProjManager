@@ -1,5 +1,8 @@
 package polsl.pl.pm.model;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.type.MaterializedClobType;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +20,25 @@ public class Project {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = true)
-    private String description;
+    @Column(name = "content", nullable = true)
+    @Lob @Type(type="org.hibernate.type.MaterializedClobType")
+    private String content;
+
+
+
 
     @Column(name = "userId", nullable = false)
     private int userId;
 
-
     public Project(){}
+
+    public Project(String title) {
+        this.title = title;
+    }
 
     public Project(String title, String description, int userId) {
         this.title = title;
-        this.description = description;
+        this.content = description;
         this.userId = userId;
     }
 
@@ -48,12 +58,12 @@ public class Project {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public int getUserId() {

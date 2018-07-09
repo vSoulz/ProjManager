@@ -1,7 +1,7 @@
 package polsl.pl.pm.model;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.type.MaterializedClobType;
+
 import javax.persistence.*;
 
 @Entity
@@ -42,8 +42,8 @@ public class Task {
     @Lob @Type(type="org.hibernate.type.MaterializedClobType")
     private String time;
 
-    @Column(name = "projectId", nullable = true)
-    private int projectId = 0;
+    @Column(name = "project", nullable = true)
+    private Integer project = 0;
 
     public Task(String title, String content, boolean finished, String status, int userId) {
         this.title = title;
@@ -98,14 +98,6 @@ public class Task {
         this.userId = userId;
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -136,5 +128,13 @@ public class Task {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Integer getProject() {
+        return project;
+    }
+
+    public void setProject(Integer project) {
+        this.project = project;
     }
 }

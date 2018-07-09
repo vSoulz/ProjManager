@@ -24,22 +24,15 @@ public class Project {
     @Lob @Type(type="org.hibernate.type.MaterializedClobType")
     private String content;
 
-
-
-
-    @Column(name = "userId", nullable = false)
-    private int userId;
-
     public Project(){}
 
     public Project(String title) {
         this.title = title;
     }
 
-    public Project(String title, String description, int userId) {
+    public Project(String title, String description) {
         this.title = title;
         this.content = description;
-        this.userId = userId;
     }
 
     public int getProjectId() {
@@ -66,11 +59,4 @@ public class Project {
         this.content = content;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

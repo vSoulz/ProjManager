@@ -32,7 +32,7 @@ public class TaskController {
         upTask.setSource(json.get("source"));
         upTask.setUserId(Integer.parseInt(json.get("userId")));
         upTask.setTitle(json.get("title"));
-        upTask.setProjectId(0);
+        upTask.setProject(0);
         taskRepository.save(upTask);
     }
 
@@ -49,7 +49,7 @@ public class TaskController {
         upTask.setUserId(Integer.parseInt(json.get("userId")));
         upTask.setTime(json.get("time"));
         upTask.setTitle(json.get("title"));
-        upTask.setProjectId(Integer.parseInt(json.get("projectId")));
+        upTask.setProject(Integer.parseInt(json.get("project")));
         taskRepository.save(upTask);
         return upTask;
     }

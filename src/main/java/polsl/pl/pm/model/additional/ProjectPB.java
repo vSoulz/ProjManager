@@ -8,16 +8,24 @@ public class ProjectPB {
 
     Integer projectId;
     Project project;
-
-    TaskTB taskTB;
+    TaskPB taskPB;
+    String bugs;
 
     public ProjectPB() {
     }
 
-    public ProjectPB(Integer projectId, Project project, TaskTB taskTB) {
+    public ProjectPB(Integer projectId, Project project, TaskPB taskPB) {
         this.projectId = projectId;
         this.project = project;
-        this.taskTB = taskTB;
+        this.taskPB = taskPB;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 
     public Project getProject() {
@@ -28,11 +36,19 @@ public class ProjectPB {
         this.project = project;
     }
 
-    public TaskTB getTasks() {
-        return taskTB;
+    public TaskPB getTaskPB() {
+        return taskPB;
     }
 
-    public void setTasks(TaskTB taskTB) {
-        this.taskTB = taskTB;
+    public void setTaskPB(TaskPB taskPB) {
+        this.taskPB = taskPB;
+    }
+
+    public String getBugs() {
+        return bugs;
+    }
+
+    public void setBugs(String bugs) {
+        this.bugs = bugs;
     }
 }

@@ -29,8 +29,8 @@ public class WorkByPersonController {
     public List<UserTB> WorkByPersonWeb(){
         Iterable<User> users = userRepository.findAll();
         List<UserTB> userTBList = new ArrayList<>();
-        userTBList.add(new UserTB(0, "Unassigned", new TaskTB( 0,
-                taskRepository.findByUserIdAndStatus(0, "open"), taskRepository.findByUserIdAndStatus(0,"done"))));
+//        userTBList.add(new UserTB(0, "Unassigned", new TaskTB( 0,
+//                taskRepository.findByUserIdAndStatus(0, "open"), taskRepository.findByUserIdAndStatus(0,"done"))));
         for (User user: users)
         {
 //            List<Task> tasks = new ArrayList<>();
@@ -39,7 +39,6 @@ public class WorkByPersonController {
 //            taskRepository.save(tasks);
             userTBList.add(new UserTB(user.getId(), user.getUsername(), new TaskTB(user.getId(),
                     taskRepository.findByUserIdAndStatus(user.getId(),"open"), taskRepository.findByUserIdAndStatus(user.getId(),"done"))));
-
         }
         return userTBList;
     }
@@ -53,9 +52,11 @@ public class WorkByPersonController {
     @RequestMapping(method = RequestMethod.PUT)
     public void UpdateTask(@RequestBody Map<String, String> json)
     {
+        System.out.println("\n\nWORKBYPERSON\n\n");
         Task task = taskRepository.findByTaskId(Integer.parseInt(json.get("taskId")));
         if(task!=null)
         {
+            task.setProject(Integer.parseInt(json.get("projectId")));
             task.setUserId(Integer.parseInt(json.get("newUserId")));
             task.setStatus(json.get("newStatus"));
             taskRepository.save(task);

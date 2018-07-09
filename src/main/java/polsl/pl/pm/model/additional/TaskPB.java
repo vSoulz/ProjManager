@@ -4,25 +4,24 @@ import polsl.pl.pm.model.Task;
 
 import java.util.List;
 
-public class TaskTB {
+public class TaskPB {
 
-    int userId;
+    int projectId;
     private List<Task> open;
     private List<Task> close;
 
-    public TaskTB(int userId, List<Task> open, List<Task> close) {
-        this.userId = userId;
+    public TaskPB(int projectId, List<Task> open, List<Task> close) {
+        this.projectId = projectId;
         this.open = open;
         this.close = close;
     }
 
-
-    public int getUserId() {
-        return userId;
+    public int getProjectId() {
+        return projectId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public List<Task> getOpen() {
